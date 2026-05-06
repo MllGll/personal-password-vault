@@ -397,9 +397,9 @@ export default function PasswordVault() {
 	}
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-background flex flex-col">
 			{!isVaultOpen ? (
-				<div className="min-h-screen max-w-md mx-auto flex items-center">
+				<div className="flex-1 max-w-md mx-auto flex items-center justify-center py-8">
 					<Card className="mx-4">
 						<CardHeader className="text-center">
 							<Vault className="w-16 h-16 text-primary mx-auto mb-4" />
@@ -419,7 +419,7 @@ export default function PasswordVault() {
 					</Card>
 				</div>
 			) : (
-				<>
+				<div className="flex-1 flex flex-col">
 					<header className="border-b bg-card">
 						<div className="container mx-auto px-4 py-4 flex items-center justify-between">
 							<div className="flex items-center gap-3">
@@ -594,7 +594,7 @@ export default function PasswordVault() {
 							</div>
 						</div>
 					</main>
-				</>
+				</div>
 			)}
 
 			<CreateVault
@@ -642,6 +642,18 @@ export default function PasswordVault() {
 				setSettings={setSettings}
 				saveSettings={saveSettings}
 			/>
+
+			<footer className="py-4 text-center text-sm text-muted-foreground mt-auto">
+				{t("footer.developedBy")}{" "}
+				<a
+					href="https://github.com/MllGll"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="font-semibold hover:underline"
+				>
+					Marcello Gallante
+				</a>
+			</footer>
 		</div>
 	);
 }

@@ -158,6 +158,9 @@
 			}
 		}
 	},
+	"footer": {
+		"developedBy": "Developed by"
+	},
 	"errors": {
 		"browserNotSupported": "This browser does not support the File System Access API required for full functionality.",
 		"supportedBrowsers": "Supported browsers",
