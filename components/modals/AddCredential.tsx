@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import type { Credential } from "@/types";
 import { Textarea } from "../ui/textarea";
+import { useTranslation } from "@/app/i18n/client";
 
 type AddCredentialProps = {
 	showAddCredential: boolean;
@@ -39,20 +40,38 @@ export default function AddCredential({
 	categories,
 	categoryColors,
 }: AddCredentialProps) {
+	const { t } = useTranslation();
+
+	const getCategoryKey = (category: string): string => {
+		const keyMap: Record<string, string> = {
+			"Email": "email",
+			"Redes Sociais": "social",
+			"Trabalho": "work",
+			"Bancos": "banking",
+			"Compras": "shopping",
+			"Streamings": "streaming",
+			"Games": "games",
+			"Educação": "education",
+			"Saúde": "health",
+			"Outros": "others"
+		};
+		return keyMap[category] || category.toLowerCase();
+	};
+
 	return (
 		<Dialog open={showAddCredential} onOpenChange={setShowAddCredential}>
 			<DialogContent className="max-w-2xl">
 				<DialogHeader>
-					<DialogTitle>Adicionar Nova Credencial</DialogTitle>
+					<DialogTitle>{t("modals.addCredential.title")}</DialogTitle>
 					<DialogDescription>
-						Preencha os dados da nova credencial
+						{t("modals.addCredential.description")}
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="grid gap-4">
 					<div className="grid grid-cols-2 gap-4">
 						<div>
-							<Label htmlFor="cred-name">Nome</Label>
+							<Label htmlFor="cred-name">{t("credential.name")}</Label>
 							<Input
 								value={newCredential.name || ""}
 								onChange={(e) =>
@@ -61,13 +80,13 @@ export default function AddCredential({
 										name: e.target.value,
 									}))
 								}
-								placeholder="Ex: Gmail Pessoal"
+								placeholder={t("modals.addCredential.placeholder.name")}
 								maxLength={50}
 							/>
 						</div>
 
 						<div>
-							<Label htmlFor="cred-category">Categoria</Label>
+							<Label htmlFor="cred-category">{t("credential.category")}</Label>
 							<Select
 								value={newCredential.category}
 								onValueChange={(value) =>
@@ -87,7 +106,7 @@ export default function AddCredential({
 												<div
 													className={`w-3 h-3 rounded-full ${categoryColors[category].bg}`}
 												/>
-												{category}
+												{t(`categories.${getCategoryKey(category)}`)}
 											</div>
 										</SelectItem>
 									))}
@@ -98,7 +117,7 @@ export default function AddCredential({
 
 					<div className="grid grid-cols-2 gap-4">
 						<div>
-							<Label htmlFor="cred-username">Usuário/Login</Label>
+							<Label htmlFor="cred-username">{t("credential.username")}</Label>
 							<Input
 								value={newCredential.username || ""}
 								onChange={(e) =>
@@ -107,13 +126,13 @@ export default function AddCredential({
 										username: e.target.value,
 									}))
 								}
-								placeholder="usuario@email.com"
+								placeholder={t("modals.addCredential.placeholder.username")}
 								maxLength={50}
 							/>
 						</div>
 
 						<div>
-							<Label htmlFor="cred-password">Senha</Label>
+							<Label htmlFor="cred-password">{t("credential.password")}</Label>
 							<Input
 								type="password"
 								value={newCredential.password || ""}
@@ -123,14 +142,14 @@ export default function AddCredential({
 										password: e.target.value,
 									}))
 								}
-								placeholder="Senha segura"
+								placeholder={t("modals.addCredential.placeholder.password")}
 								maxLength={50}
 							/>
 						</div>
 					</div>
 
 					<div>
-						<Label htmlFor="cred-url">URL (opcional)</Label>
+						<Label htmlFor="cred-url">{t("credential.url")} ({t("common.optional")})</Label>
 						<Input
 							value={newCredential.url || ""}
 							onChange={(e) =>
@@ -139,13 +158,13 @@ export default function AddCredential({
 									url: e.target.value,
 								}))
 							}
-							placeholder="https://exemplo.com"
+							placeholder={t("modals.addCredential.placeholder.url")}
 							maxLength={100}
 						/>
 					</div>
 
 					<div>
-						<Label htmlFor="cred-notes">Observações (opcional)</Label>
+						<Label htmlFor="cred-notes">{t("credential.notes")} ({t("common.optional")})</Label>
 						<Textarea
 							value={newCredential.notes || ""}
 							onChange={(e) =>
@@ -154,7 +173,7 @@ export default function AddCredential({
 									notes: e.target.value,
 								}))
 							}
-							placeholder="Informações adicionais..."
+							placeholder={t("modals.addCredential.placeholder.notes")}
 							rows={3}
 							maxLength={500}
 						/>
@@ -163,13 +182,13 @@ export default function AddCredential({
 					<div className="flex gap-2 pt-4">
 						<Button onClick={addCredential} className="flex-1">
 							<Plus className="w-4 h-4 mr-2" />
-							Adicionar Credencial
+							{t("modals.addCredential.submit")}
 						</Button>
 						<Button
 							variant="outline"
 							onClick={() => setShowAddCredential(false)}
 						>
-							Cancelar
+							{t("common.cancel")}
 						</Button>
 					</div>
 				</div>

@@ -1,0 +1,172 @@
+{
+	"metadata": {
+		"title": "Personal Password Vault",
+		"description": "Manage your passwords securely without storing data online"
+	},
+	"common": {
+		"cancel": "Cancel",
+		"save": "Save",
+		"add": "Add",
+		"edit": "Edit",
+		"delete": "Delete",
+		"copy": "Copy",
+		"close": "Close",
+		"loading": "Loading...",
+		"search": "Search",
+		"required": "Required",
+		"optional": "optional",
+		"created": "Created",
+		"updated": "Updated",
+		"success": "Success",
+		"error": "Error",
+		"warning": "Warning"
+	},
+	"categories": {
+		"email": "Email",
+		"social": "Social Media",
+		"work": "Work",
+		"banking": "Banking",
+		"shopping": "Shopping",
+		"streaming": "Streaming",
+		"games": "Games",
+		"education": "Education",
+		"health": "Health",
+		"others": "Others",
+		"all": "All categories"
+	},
+	"landing": {
+		"title": "Personal Password Vault",
+		"shortTitle": "PPV",
+		"description": "Manage your passwords securely",
+		"createVault": "Create New Vault",
+		"openVault": "Open Existing Vault"
+	},
+	"vault": {
+		"title": "Personal Password Vault",
+		"shortTitle": "PPV",
+		"vaultName": "Vault: {{name}}",
+		"switchVault": "Switch Vault",
+		"lock": "Lock Vault",
+		"addCredential": "Add Credential",
+		"searchPlaceholder": "Search credentials...",
+		"viewList": "List view",
+		"viewGrid": "Grid view",
+		"noCredentials": "No credentials registered yet",
+		"noResults": "No credentials found with applied filters",
+		"locked": "Vault locked",
+		"lockedDescription": "Access Settings to adjust lock options",
+		"filters": {
+			"category": "Category"
+		}
+	},
+	"credential": {
+		"name": "Name",
+		"category": "Category",
+		"username": "Username/Login",
+		"password": "Password",
+		"url": "URL",
+		"notes": "Notes",
+		"createdAt": "Created at",
+		"updatedAt": "Updated at",
+		"show": "Show",
+		"hide": "Hide",
+		"copied": "{{type}} copied to clipboard",
+		"copyError": "Error copying to clipboard",
+		"confirmDelete": "Are you sure you want to delete this credential?",
+		"deleted": "Credential deleted successfully",
+		"usernameLabel": "User:",
+		"passwordLabel": "Password:",
+		"urlLabel": "URL:",
+		"notesLabel": "Notes:"
+	},
+	"modals": {
+		"createVault": {
+			"title": "Create New Vault",
+			"description": "Choose a name and a secure master password for your vault",
+			"vaultName": "Vault Name",
+			"masterPassword": "Master Password",
+			"placeholder": {
+				"vaultName": "Ex: My Passwords",
+				"masterPassword": "Minimum 8 characters"
+			},
+			"warning": "⚠️ If you lose this password, you will not be able to recover your data",
+			"submit": "Create Vault",
+			"submitLoading": "Creating...",
+			"errors": {
+				"requiredFields": "Vault name and master password are required",
+				"minPassword": "Master password must be at least 8 characters"
+			},
+			"success": "Vault created successfully",
+			"error": "Error creating vault: {{message}}"
+		},
+		"openVault": {
+			"title": "Open Existing Vault",
+			"description": "Enter the vault master password and then select the .vault file",
+			"masterPassword": "Master Password",
+			"placeholder": "Enter your master password",
+			"submit": "Open Vault",
+			"submitLoading": "Opening...",
+			"success": "Vault opened successfully",
+			"error": "Error opening vault: {{message}}"
+		},
+		"addCredential": {
+			"title": "Add New Credential",
+			"description": "Fill in the credential details",
+			"submit": "Add Credential",
+			"success": "Credential added successfully",
+			"errors": {
+				"required": "Name, category, username and password are required"
+			},
+			"placeholder": {
+				"name": "Ex: Gmail Personal",
+				"username": "user@email.com",
+				"password": "Secure password",
+				"url": "https://example.com",
+				"notes": "Additional information..."
+			}
+		},
+		"editCredential": {
+			"title": "Edit Credential",
+			"description": "Modify the credential details",
+			"submit": "Save Changes",
+			"success": "Credential updated successfully"
+		},
+		"settings": {
+			"title": "Settings",
+			"description": "Customize system behavior",
+			"language": "Language",
+			"theme": "Theme",
+			"themes": {
+				"light": "Light",
+				"dark": "Dark",
+				"system": "System"
+			},
+			"lockTimeout": "Auto-Lock Timeout",
+			"timeouts": {
+				"disabled": "Disabled",
+				"minutes_one": "{{count}} minute",
+				"minutes_other": "{{count}} minutes",
+				"hours_one": "{{count}} hour",
+				"hours_other": "{{count}} hours"
+			},
+			"submit": "Save Settings",
+			"success": "Settings saved successfully",
+			"error": "Error saving settings",
+			"about": {
+				"title": "About saved settings",
+				"description": "Preferences and data configured in this section are stored locally in your browser."
+			}
+		}
+	},
+	"errors": {
+		"browserNotSupported": "This browser does not support the File System Access API required for full functionality.",
+		"supportedBrowsers": "Supported browsers",
+		"vaultCorrupted": "Invalid or corrupted vault file",
+		"vaultFormat": "Unsupported file format",
+		"dataCorrupted": "Vault data corrupted",
+		"invalidData": "Invalid data structure",
+		"operationCancelled": "Operation cancelled by user",
+		"saveError": "Error saving: {{message}}",
+		"saveCredentialsError": "Could not save: vault or master password not available."
+	}
+}

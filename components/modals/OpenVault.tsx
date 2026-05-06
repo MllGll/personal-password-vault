@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "@/app/i18n/client";
 
 type OpenVaultProps = {
 	showOpenVault: boolean;
@@ -27,26 +28,26 @@ export default function OpenVault({
 	openExistingVault,
 	loading,
 }: OpenVaultProps) {
+	const { t } = useTranslation();
+
 	return (
 		<Dialog open={showOpenVault} onOpenChange={setShowOpenVault}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Abrir Cofre Existente</DialogTitle>
+					<DialogTitle>{t("modals.openVault.title")}</DialogTitle>
 					<DialogDescription>
-						{
-							"Digite a senha mestra do cofre e então selecione o arquivo .vault"
-						}
+						{t("modals.openVault.description")}
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="space-y-4">
 					<div>
-						<Label htmlFor="master-password-open">Senha Mestra</Label>
+						<Label htmlFor="master-password-open">{t("modals.openVault.masterPassword")}</Label>
 						<Input
 							type="password"
 							value={masterPassword}
 							onChange={(e) => setMasterPassword(e.target.value)}
-							placeholder="Digite sua senha mestra"
+							placeholder={t("modals.openVault.placeholder")}
 							maxLength={50}
 						/>
 					</div>
@@ -57,7 +58,7 @@ export default function OpenVault({
 							disabled={loading}
 							className="flex-1"
 						>
-							{loading ? "Abrindo..." : "Abrir Cofre"}
+							{loading ? t("modals.openVault.submitLoading") : t("modals.openVault.submit")}
 						</Button>
 						<Button
 							variant="outline"
@@ -67,7 +68,7 @@ export default function OpenVault({
 							}}
 							disabled={loading}
 						>
-							Cancelar
+							{t("common.cancel")}
 						</Button>
 					</div>
 				</div>

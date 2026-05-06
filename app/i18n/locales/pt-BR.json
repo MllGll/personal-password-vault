@@ -1,0 +1,172 @@
+{
+	"metadata": {
+		"title": "Cofre de Senhas Pessoal",
+		"description": "Gerencie suas senhas de forma segura sem guardar dados online"
+	},
+	"common": {
+		"cancel": "Cancelar",
+		"save": "Salvar",
+		"add": "Adicionar",
+		"edit": "Editar",
+		"delete": "Excluir",
+		"copy": "Copiar",
+		"close": "Fechar",
+		"loading": "Carregando...",
+		"search": "Pesquisar",
+		"required": "Obrigatório",
+		"optional": "opcional",
+		"created": "Criado",
+		"updated": "Atualizado",
+		"success": "Sucesso",
+		"error": "Erro",
+		"warning": "Aviso"
+	},
+	"categories": {
+		"email": "Email",
+		"social": "Redes Sociais",
+		"work": "Trabalho",
+		"banking": "Bancos",
+		"shopping": "Compras",
+		"streaming": "Streamings",
+		"games": "Games",
+		"education": "Educação",
+		"health": "Saúde",
+		"others": "Outros",
+		"all": "Todas as categorias"
+	},
+	"landing": {
+		"title": "Cofre de Senhas Pessoal",
+		"shortTitle": "CSP",
+		"description": "Gerencie suas senhas de forma segura",
+		"createVault": "Criar Novo Cofre",
+		"openVault": "Abrir Cofre Existente"
+	},
+	"vault": {
+		"title": "Cofre de Senhas Pessoal",
+		"shortTitle": "CSP",
+		"vaultName": "Nome: {{name}}",
+		"switchVault": "Trocar de Cofre",
+		"lock": "Bloquear Cofre Atual",
+		"addCredential": "Adicionar Credencial",
+		"searchPlaceholder": "Pesquisar credenciais...",
+		"viewList": "Visualização em lista",
+		"viewGrid": "Visualização em grade",
+		"noCredentials": "Nenhuma credencial cadastrada ainda",
+		"noResults": "Nenhuma credencial encontrada com os filtros aplicados",
+		"locked": "Cofre bloqueado",
+		"lockedDescription": "Acesse as Configurações para ajustar as opções de bloqueio",
+		"filters": {
+			"category": "Categoria"
+		}
+	},
+	"credential": {
+		"name": "Nome",
+		"category": "Categoria",
+		"username": "Usuário/Login",
+		"password": "Senha",
+		"url": "URL",
+		"notes": "Observações",
+		"createdAt": "Criado em",
+		"updatedAt": "Atualizado em",
+		"show": "Mostrar",
+		"hide": "Ocultar",
+		"copied": "{{type}} copiado para a área de transferência",
+		"copyError": "Erro ao copiar para área de transferência",
+		"confirmDelete": "Tem certeza que deseja excluir esta credencial?",
+		"deleted": "Credencial excluída com sucesso",
+		"usernameLabel": "Usuário:",
+		"passwordLabel": "Senha:",
+		"urlLabel": "URL:",
+		"notesLabel": "Observações:"
+	},
+	"modals": {
+		"createVault": {
+			"title": "Criar Novo Cofre",
+			"description": "Escolha um nome e uma senha mestra segura para seu cofre",
+			"vaultName": "Nome do Cofre",
+			"masterPassword": "Senha Mestra",
+			"placeholder": {
+				"vaultName": "Ex: Minhas Senhas",
+				"masterPassword": "Mínimo 8 caracteres"
+			},
+			"warning": "⚠️ Se você perder esta senha, não será possível recuperar seus dados",
+			"submit": "Criar Cofre",
+			"submitLoading": "Criando...",
+			"errors": {
+				"requiredFields": "Nome do cofre e senha mestra são obrigatórios",
+				"minPassword": "A senha mestra deve ter pelo menos 8 caracteres"
+			},
+			"success": "Cofre criado com sucesso",
+			"error": "Erro ao criar cofre: {{message}}"
+		},
+		"openVault": {
+			"title": "Abrir Cofre Existente",
+			"description": "Digite a senha mestra do cofre e então selecione o arquivo .vault",
+			"masterPassword": "Senha Mestra",
+			"placeholder": "Digite sua senha mestra",
+			"submit": "Abrir Cofre",
+			"submitLoading": "Abrindo...",
+			"success": "Cofre aberto com sucesso",
+			"error": "Erro ao abrir cofre: {{message}}"
+		},
+		"addCredential": {
+			"title": "Adicionar Nova Credencial",
+			"description": "Preencha os dados da nova credencial",
+			"submit": "Adicionar Credencial",
+			"success": "Credencial adicionada com sucesso",
+			"errors": {
+				"required": "Nome, categoria, usuário e senha são obrigatórios"
+			},
+			"placeholder": {
+				"name": "Ex: Gmail Pessoal",
+				"username": "usuario@email.com",
+				"password": "Senha segura",
+				"url": "https://exemplo.com",
+				"notes": "Informações adicionais..."
+			}
+		},
+		"editCredential": {
+			"title": "Editar Credencial",
+			"description": "Modifique os dados da credencial",
+			"submit": "Salvar Alterações",
+			"success": "Credencial atualizada com sucesso"
+		},
+		"settings": {
+			"title": "Configurações",
+			"description": "Personalize o comportamento do sistema",
+			"language": "Idioma",
+			"theme": "Tema",
+			"themes": {
+				"light": "Claro",
+				"dark": "Escuro",
+				"system": "Sistema"
+			},
+			"lockTimeout": "Tempo de Bloqueio Automático",
+			"timeouts": {
+				"disabled": "Desabilitado",
+				"minutes_one": "{{count}} minuto",
+				"minutes_other": "{{count}} minutos",
+				"hours_one": "{{count}} hora",
+				"hours_other": "{{count}} horas"
+			},
+			"submit": "Salvar Configurações",
+			"success": "Configurações salvas com sucesso",
+			"error": "Erro ao salvar configurações",
+			"about": {
+				"title": "Sobre as configurações salvas",
+				"description": "As preferências e dados configurados nesta seção são armazenados localmente no seu navegador."
+			}
+		}
+	},
+	"errors": {
+		"browserNotSupported": "Este navegador não suporta a File System Access API necessária para o funcionamento completo.",
+		"supportedBrowsers": "Navegadores suportados",
+		"vaultCorrupted": "Arquivo de cofre inválido ou corrompido",
+		"vaultFormat": "Formato de arquivo não suportado",
+		"dataCorrupted": "Dados do cofre corrompidos",
+		"invalidData": "Estrutura de dados inválida",
+		"operationCancelled": "Operação cancelada pelo usuário",
+		"saveError": "Erro ao salvar: {{message}}",
+		"saveCredentialsError": "Não foi possível salvar: cofre ou senha mestra não disponíveis."
+	}
+}

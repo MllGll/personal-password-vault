@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import type { Credential } from "@/types";
 import { Textarea } from "../ui/textarea";
+import { useTranslation } from "@/app/i18n/client";
 
 type EditCredentialProps = {
 	editingCredential: Credential | null;
@@ -35,6 +36,24 @@ export default function EditCredential({
 	categories,
 	categoryColors,
 }: EditCredentialProps) {
+	const { t } = useTranslation();
+
+	const getCategoryKey = (category: string): string => {
+		const keyMap: Record<string, string> = {
+			"Email": "email",
+			"Redes Sociais": "social",
+			"Trabalho": "work",
+			"Bancos": "banking",
+			"Compras": "shopping",
+			"Streamings": "streaming",
+			"Games": "games",
+			"Educação": "education",
+			"Saúde": "health",
+			"Outros": "others"
+		};
+		return keyMap[category] || category.toLowerCase();
+	};
+
 	return (
 		<Dialog
 			open={!!editingCredential}
@@ -42,16 +61,16 @@ export default function EditCredential({
 		>
 			<DialogContent className="max-w-2xl">
 				<DialogHeader>
-					<DialogTitle>Editar Credencial</DialogTitle>
+					<DialogTitle>{t("modals.editCredential.title")}</DialogTitle>
 					<DialogDescription>
-						Modifique os dados da credencial
+						{t("modals.editCredential.description")}
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="grid gap-4">
 					<div className="grid grid-cols-2 gap-4">
 						<div>
-							<Label htmlFor="cred-name">Nome</Label>
+							<Label htmlFor="cred-name">{t("credential.name")}</Label>
 							<Input
 								value={editingCredential?.name}
 								onChange={(e) =>
@@ -59,13 +78,13 @@ export default function EditCredential({
 										prev ? { ...prev, name: e.target.value } : null,
 									)
 								}
-								placeholder="Ex: Gmail Pessoal"
+								placeholder={t("modals.addCredential.placeholder.name")}
 								maxLength={50}
 							/>
 						</div>
 
 						<div>
-							<Label htmlFor="cred-category">Categoria</Label>
+							<Label htmlFor="cred-category">{t("credential.category")}</Label>
 							<Select
 								value={editingCredential?.category}
 								onValueChange={(value) =>
@@ -84,7 +103,7 @@ export default function EditCredential({
 												<div
 													className={`w-3 h-3 rounded-full ${categoryColors[category].bg}`}
 												/>
-												{category}
+												{t(`categories.${getCategoryKey(category)}`)}
 											</div>
 										</SelectItem>
 									))}
@@ -95,7 +114,7 @@ export default function EditCredential({
 
 					<div className="grid grid-cols-2 gap-4">
 						<div>
-							<Label htmlFor="cred-username">Usuário/Login</Label>
+							<Label htmlFor="cred-username">{t("credential.username")}</Label>
 							<Input
 								value={editingCredential?.username || ""}
 								onChange={(e) =>
@@ -103,13 +122,13 @@ export default function EditCredential({
 										prev ? { ...prev, username: e.target.value } : null,
 									)
 								}
-								placeholder="usuario@email.com"
+								placeholder={t("modals.addCredential.placeholder.username")}
 								maxLength={50}
 							/>
 						</div>
 
 						<div>
-							<Label htmlFor="cred-password">Senha</Label>
+							<Label htmlFor="cred-password">{t("credential.password")}</Label>
 							<Input
 								type="password"
 								value={editingCredential?.password || ""}
@@ -118,14 +137,14 @@ export default function EditCredential({
 										prev ? { ...prev, password: e.target.value } : null,
 									)
 								}
-								placeholder="Senha segura"
+								placeholder={t("modals.addCredential.placeholder.password")}
 								maxLength={50}
 							/>
 						</div>
 					</div>
 
 					<div>
-						<Label htmlFor="cred-url">URL (opcional)</Label>
+						<Label htmlFor="cred-url">{t("credential.url")} ({t("common.optional")})</Label>
 						<Input
 							value={editingCredential?.url || ""}
 							onChange={(e) =>
@@ -133,13 +152,13 @@ export default function EditCredential({
 									prev ? { ...prev, url: e.target.value } : null,
 								)
 							}
-							placeholder="https://exemplo.com"
+							placeholder={t("modals.addCredential.placeholder.url")}
 							maxLength={100}
 						/>
 					</div>
 
 					<div>
-						<Label htmlFor="cred-notes">Observações (opcional)</Label>
+						<Label htmlFor="cred-notes">{t("credential.notes")} ({t("common.optional")})</Label>
 						<Textarea
 							value={editingCredential?.notes || ""}
 							onChange={(e) =>
@@ -147,7 +166,7 @@ export default function EditCredential({
 									prev ? { ...prev, notes: e.target.value } : null,
 								)
 							}
-							placeholder="Informações adicionais..."
+							placeholder={t("modals.addCredential.placeholder.notes")}
 							rows={3}
 							maxLength={500}
 						/>
@@ -156,14 +175,14 @@ export default function EditCredential({
 					<div className="flex gap-2 pt-4">
 						<Button onClick={updateCredential} className="flex-1">
 							<Save className="w-4 h-4 mr-2" />
-							Salvar Alterações
+							{t("modals.editCredential.submit")}
 						</Button>
 
 						<Button
 							variant="outline"
 							onClick={() => setEditingCredential(null)}
 						>
-							Cancelar
+							{t("common.cancel")}
 						</Button>
 					</div>
 				</div>

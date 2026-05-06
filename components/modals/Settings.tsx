@@ -1,5 +1,5 @@
-import { Monitor, Moon, Sun, TriangleAlert } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { Globe, Monitor, Moon, Sun, TriangleAlert } from "lucide-react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -16,9 +16,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import type { AppSettings } from "@/types";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { useTranslation } from "@/app/i18n/client";
+import { type Locale } from "@/app/i18n/config";
 
 type SettingsProps = {
 	showSettings: boolean;
@@ -35,19 +36,69 @@ export default function Settings({
 	setSettings,
 	saveSettings,
 }: SettingsProps) {
+	const { t, i18n } = useTranslation();
+
+	// Estado temporário para o idioma selecionado
+	const [pendingLanguage, setPendingLanguage] = useState<Locale>(i18n.language as Locale);
+
+	// Sincroniza o estado temporário quando o modal abre
+	useEffect(() => {
+		if (showSettings) {
+			setPendingLanguage(i18n.language as Locale);
+		}
+	}, [showSettings, i18n.language]);
+
+	const handleLanguageChange = (value: Locale) => {
+		setPendingLanguage(value);
+	};
+
+	const handleSave = () => {
+		// Aplica a mudança de idioma antes de salvar
+		if (pendingLanguage !== i18n.language) {
+			i18n.changeLanguage(pendingLanguage);
+			document.cookie = `i18next=${pendingLanguage}; path=/; max-age=31536000`;
+		}
+		saveSettings();
+	};
+
+	const getTimeoutLabel = (minutes: number): string => {
+		if (minutes === 0) return t("modals.settings.timeouts.disabled");
+		if (minutes === 60) return t("modals.settings.timeouts.hours_one", { count: 1 });
+		return t("modals.settings.timeouts.minutes_one", { count: minutes });
+	};
+
 	return (
 		<Dialog open={showSettings} onOpenChange={setShowSettings}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Configurações</DialogTitle>
+					<DialogTitle>{t("modals.settings.title")}</DialogTitle>
 					<DialogDescription>
-						Personalize o comportamento do sistema
+						{t("modals.settings.description")}
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="space-y-6">
 					<div>
-						<Label>Tema</Label>
+						<Label>{t("modals.settings.language")}</Label>
+						<Select
+							value={pendingLanguage}
+							onValueChange={(value) => handleLanguageChange(value as Locale)}
+						>
+							<SelectTrigger>
+								<div className="flex items-center gap-2">
+									<Globe className="w-4 h-4" />
+									<SelectValue />
+								</div>
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="en-US">🇺🇸 English</SelectItem>
+								<SelectItem value="pt-BR">🇧🇷 Português</SelectItem>
+							</SelectContent>
+						</Select>
+					</div>
+
+					<div>
+						<Label>{t("modals.settings.theme")}</Label>
 						<Select
 							value={settings.theme}
 							onValueChange={(value: "light" | "dark" | "system") =>
@@ -61,19 +112,19 @@ export default function Settings({
 								<SelectItem value="light">
 									<div className="flex items-center gap-2">
 										<Sun className="w-4 h-4" />
-										Claro
+										{t("modals.settings.themes.light")}
 									</div>
 								</SelectItem>
 								<SelectItem value="dark">
 									<div className="flex items-center gap-2">
 										<Moon className="w-4 h-4" />
-										Escuro
+										{t("modals.settings.themes.dark")}
 									</div>
 								</SelectItem>
 								<SelectItem value="system">
 									<div className="flex items-center gap-2">
 										<Monitor className="w-4 h-4" />
-										Sistema
+										{t("modals.settings.themes.system")}
 									</div>
 								</SelectItem>
 							</SelectContent>
@@ -81,7 +132,7 @@ export default function Settings({
 					</div>
 
 					<div>
-						<Label>Tempo de Bloqueio Automático</Label>
+						<Label>{t("modals.settings.lockTimeout")}</Label>
 						<Select
 							value={settings.lockTimeout.toString()}
 							onValueChange={(value) =>
@@ -95,43 +146,49 @@ export default function Settings({
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="0">Desabilitado</SelectItem>
-								<SelectItem value="1">1 minuto</SelectItem>
-								<SelectItem value="5">5 minutos</SelectItem>
-								<SelectItem value="10">10 minutos</SelectItem>
-								<SelectItem value="15">15 minutos</SelectItem>
-								<SelectItem value="30">30 minutos</SelectItem>
-								<SelectItem value="60">1 hora</SelectItem>
+								<SelectItem value="0">
+									{getTimeoutLabel(0)}
+								</SelectItem>
+								<SelectItem value="1">
+									{getTimeoutLabel(1)}
+								</SelectItem>
+								<SelectItem value="5">
+									{getTimeoutLabel(5)}
+								</SelectItem>
+								<SelectItem value="10">
+									{getTimeoutLabel(10)}
+								</SelectItem>
+								<SelectItem value="15">
+									{getTimeoutLabel(15)}
+								</SelectItem>
+								<SelectItem value="30">
+									{getTimeoutLabel(30)}
+								</SelectItem>
+								<SelectItem value="60">
+									{getTimeoutLabel(60)}
+								</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>
 
 					<Alert className="bg-yellow-50 text-yellow-800 border border-yellow-200">
-						<AlertTitle>Sobre as configurações salvas</AlertTitle>
+						<AlertTitle>{t("modals.settings.about.title")}</AlertTitle>
 						<AlertDescription>
-							<p>
-								As preferências e dados configurados nesta seção são armazenados
-								localmente no seu navegador. Isso significa que:
-							</p>
+							<p>{t("modals.settings.about.description")}</p>
 							<ul className="list-inside list-disc text-sm">
 								<li>
-									Eles não serão apagados ao fechar ou reiniciar o navegador
-								</li>
-								<li>
-									Permanecerão salvos até que você limpe os dados do site
-									manualmente, utilize outro navegador/dispositivo ou redefina
-									as configurações aqui
+									{t("modals.settings.about.description")}
 								</li>
 							</ul>
 						</AlertDescription>
 					</Alert>
 
 					<div className="flex gap-2 pt-4">
-						<Button onClick={saveSettings} className="flex-1">
-							Salvar Configurações
+						<Button onClick={handleSave} className="flex-1">
+							{t("modals.settings.submit")}
 						</Button>
 						<Button variant="outline" onClick={() => setShowSettings(false)}>
-							Cancelar
+							{t("common.cancel")}
 						</Button>
 					</div>
 				</div>

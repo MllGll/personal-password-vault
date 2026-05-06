@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "@/app/i18n/client";
 
 type CreateVaultProps = {
 	showCreateVault: boolean;
@@ -31,39 +32,40 @@ export default function CreateVault({
 	createNewVault,
 	loading,
 }: CreateVaultProps) {
+	const { t } = useTranslation();
+
 	return (
 		<Dialog open={showCreateVault} onOpenChange={setShowCreateVault}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Criar Novo Cofre</DialogTitle>
+					<DialogTitle>{t("modals.createVault.title")}</DialogTitle>
 					<DialogDescription>
-						Escolha um nome e uma senha mestra segura para seu cofre
+						{t("modals.createVault.description")}
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="space-y-4">
 					<div>
-						<Label htmlFor="vault-name">Nome do Cofre</Label>
+						<Label htmlFor="vault-name">{t("modals.createVault.vaultName")}</Label>
 						<Input
 							value={vaultName}
 							onChange={(e) => setVaultName(e.target.value)}
-							placeholder="Ex: Minhas Senhas"
+							placeholder={t("modals.createVault.placeholder.vaultName")}
 							maxLength={50}
 						/>
 					</div>
 
 					<div>
-						<Label htmlFor="master-password">Senha Mestra</Label>
+						<Label htmlFor="master-password">{t("modals.createVault.masterPassword")}</Label>
 						<Input
 							type="password"
 							value={masterPassword}
 							onChange={(e) => setMasterPassword(e.target.value)}
-							placeholder="Mínimo 8 caracteres"
+							placeholder={t("modals.createVault.placeholder.masterPassword")}
 							maxLength={50}
 						/>
 						<p className="text-xs text-muted-foreground mt-1">
-							⚠️ Se você perder esta senha, não será possível recuperar seus
-							dados
+							{t("modals.createVault.warning")}
 						</p>
 					</div>
 
@@ -73,7 +75,7 @@ export default function CreateVault({
 							disabled={loading}
 							className="flex-1"
 						>
-							{loading ? "Criando..." : "Criar Cofre"}
+							{loading ? t("modals.createVault.submitLoading") : t("modals.createVault.submit")}
 						</Button>
 						<Button
 							variant="outline"
@@ -84,7 +86,7 @@ export default function CreateVault({
 							}}
 							disabled={loading}
 						>
-							Cancelar
+							{t("common.cancel")}
 						</Button>
 					</div>
 				</div>
