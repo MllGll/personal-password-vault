@@ -181,7 +181,7 @@ export default function AddCredential({
 
 					<div className="flex gap-2 pt-4">
 						<Button onClick={addCredential} className="flex-1">
-							<Plus className="w-4 h-4 mr-2" />
+							<Plus className="w-4 h-4" />
 							{t("modals.addCredential.submit")}
 						</Button>
 						<Button

@@ -174,7 +174,7 @@ export default function EditCredential({
 
 					<div className="flex gap-2 pt-4">
 						<Button onClick={updateCredential} className="flex-1">
-							<Save className="w-4 h-4 mr-2" />
+							<Save className="w-4 h-4" />
 							{t("modals.editCredential.submit")}
 						</Button>
 

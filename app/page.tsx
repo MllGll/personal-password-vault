@@ -408,11 +408,11 @@ export default function PasswordVault() {
 						</CardHeader>
 						<CardContent className="space-y-4">
 							<Button className="w-full" onClick={() => setShowCreateVault(true)}>
-								<Plus className="w-4 h-4 mr-2" />
+								<Plus className="w-4 h-4" />
 								{t("landing.createVault")}
 							</Button>
 							<Button variant="outline" className="w-full" onClick={() => setShowOpenVault(true)}>
-								<FolderOpen className="w-4 h-4 mr-2" />
+								<FolderOpen className="w-4 h-4" />
 								{t("landing.openVault")}
 							</Button>
 						</CardContent>
@@ -464,7 +464,7 @@ export default function PasswordVault() {
 									setShowAddCredential(true);
 									setNewCredential({ name: "", username: "", password: "", url: "", notes: "", category: "" });
 								}}>
-									<Plus className="w-4 h-4 mr-2" />
+									<Plus className="w-4 h-4" />
 									{t("vault.addCredential")}
 								</Button>
 							</div>
@@ -545,7 +545,7 @@ export default function PasswordVault() {
 														<div className="flex-1 space-y-3">
 															<div className="grid gap-2 text-sm">
 																<div className="flex items-center gap-2 flex-1 min-w-0">
-																	<User className="w-4 h-4 text-muted-foreground" />
+																	<User size={16} className="text-muted-foreground shrink-0" />
 																	<span className="font-medium">{t("credential.usernameLabel")}</span>
 																	<span className="font-mono truncate min-w-0">{credential.username}</span>
 																	<Button variant="ghost" size="sm" onClick={() => copyToClipboard(credential.username, t("credential.username"))}>
@@ -553,7 +553,7 @@ export default function PasswordVault() {
 																	</Button>
 																</div>
 																<div className="flex items-center gap-2 overflow-hidden">
-																	<Key className="w-4 h-4 text-muted-foreground" />
+																	<Key size={16} className="text-muted-foreground shrink-0" />
 																	<span className="font-medium">{t("credential.passwordLabel")}</span>
 																	<span className={`font-mono min-w-0 whitespace-nowrap overflow-hidden ${showPasswords[credential.id] && "text-ellipsis"}`}>
 																		{showPasswords[credential.id] ? credential.password : "•".repeat(credential.password.length)}
@@ -567,9 +567,9 @@ export default function PasswordVault() {
 																</div>
 																{credential.url && (
 																	<div className="flex items-center gap-2 overflow-hidden">
-																		<Globe className="w-4 h-4 text-muted-foreground" />
+																		<Globe size={16} className="text-muted-foreground shrink-0" />
 																		<span className="font-medium">{t("credential.urlLabel")}</span>
-																		<a href={credential.url.startsWith("http") ? credential.url : `https://${credential.url}`} target="_blank" rel="noopener noreferrer" className="text-primary underline truncate min-w-0">
+																		<a href={credential.url.startsWith("http") ? credential.url : `https://${credential.url}`} target="_blank" rel="noopener noreferrer" className="text-primary underline truncate">
 																			{credential.url}
 																		</a>
 																		<Button variant="ghost" size="sm" onClick={() => copyToClipboard(credential.url, "URL")}>
@@ -579,7 +579,7 @@ export default function PasswordVault() {
 																)}
 																{credential.notes && (
 																	<div className="flex items-center gap-2 h-9 w-full min-w-0">
-																		<StickyNote className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+																		<StickyNote size={16} className="text-muted-foreground mt-0.5 flex-shrink-0" />
 																		<span className="font-medium flex-shrink-0">{t("credential.notesLabel")}</span>
 																		<span className="text-muted-foreground truncate overflow-hidden whitespace-nowrap flex-1">{credential.notes}</span>
 																	</div>
